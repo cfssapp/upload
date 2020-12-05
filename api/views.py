@@ -15,9 +15,9 @@ from .models import Task, Article
 @api_view(['GET'])
 def apiOverview(request):
 	api_urls = [{
-        "logo": "https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png",
-        "title": "Alipay",
-        "href": "https://ant.design",
+        "logo": "https://64.media.tumblr.com/avatar_84bf27cec37f_128.pnj",
+        "title": "Albert Einstein",
+        "href": "https://www.google.com.my/",
         "subDescription": "Imagination is more important than knowledge",
         
         "owner": "User",
