@@ -835,7 +835,7 @@ def article_list(request):
         articles = Article.objects.all()
         serializer = ArticleSerializer(articles, many=True)
         # return JsonResponse(serializer.data, safe=False)
-		return JsonResponse(json, safe=False)
+		return json
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
