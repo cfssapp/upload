@@ -11,7 +11,7 @@ urlpatterns = [
 	path('users', views.UserViewSet, name="user-view"),
 	path('groups', views.GroupViewSet, name="group-view"),
 
-	path('article/', article_list),
+	path('article/', views.article_list),
 ]
 
 
