@@ -783,7 +783,7 @@ def apiOverview(request):
 	# 	'Delete':'/task-delete/<str:pk>/',
 	# 	}
 	api_urls = [{"id": 1, "title": "New Article", "author": "Parwiz"}]
-	return JsonResponse(api_urls)
+	return JsonResponse(api_urls, safe=False)
 
 @api_view(['GET'])
 def taskList(request):
