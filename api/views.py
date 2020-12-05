@@ -9,7 +9,7 @@ from .serializers import TaskSerializer, ArticleSerializer
 from .models import Task, Article
 # Create your views here.
 
-data = [
+jsonData = [
     {
         "id": "fake-list-0",
         "owner": "付小小",
@@ -835,7 +835,7 @@ def article_list(request):
         articles = Article.objects.all()
         serializer = ArticleSerializer(articles, many=True)
         # return JsonResponse(serializer.data, safe=False)
-		return Response(data)
+		return Response(serializer.jsonData)
 
 
     elif request.method == 'POST':
