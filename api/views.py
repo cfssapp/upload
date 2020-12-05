@@ -782,7 +782,7 @@ def apiOverview(request):
 		'Delete':'/task-delete/<str:pk>/',
 		}
 
-	return Response(api_urls)
+	return JsonResponse(api_urls)
 
 @api_view(['GET'])
 def taskList(request):
