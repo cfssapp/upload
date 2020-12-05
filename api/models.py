@@ -19,7 +19,7 @@ class Article(models.Model):
         return self.title
 
 class basicList(models.Model):
-    logo = models.ImageField(default='default.jpg', upload_to='upload_pics')
+    logo = models.ImageField(default='default.jpg', upload_to='upload/api/upload_pics')
     title = models.CharField(max_length=100)
     href = models.CharField(max_length=100)
     subDescription = models.CharField(max_length=100)
