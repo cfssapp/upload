@@ -18,9 +18,9 @@ def apiOverview(request):
         "logo": "https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png",
         "title": "Alipay",
         "href": "https://ant.design",
-        "subDescription": "那是一种内在的东西， 他们到达不了，也无法触及的",
+        "subDescription": "Imagination is more important than knowledge",
         
-        "owner": "付小小",
+        "owner": "User",
         "createdAt": 1607155074056,
         "updatedAt": 1607155074056,
         "percent": 83,
