@@ -15,8 +15,6 @@ from .models import Task, Article
 @api_view(['GET'])
 def apiOverview(request):
 	api_urls = [{
-        "id": "fake-list-0",
-
         "logo": "https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png",
         "title": "Alipay",
         "href": "https://ant.design",
