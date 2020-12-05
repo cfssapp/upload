@@ -4,9 +4,9 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import TaskSerializer, ArticleSerializer
+from .serializers import TaskSerializer, ArticleSerializer, basicListSerializer
 
-from .models import Task, Article
+from .models import Task, Article, basicList
 # Create your views here.
 
 
@@ -69,7 +69,6 @@ def taskDelete(request, pk):
 	return Response('Item succsesfully delete!')
 
 
-
 @csrf_exempt
 def article_list(request):
     """
@@ -85,6 +84,27 @@ def article_list(request):
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = ArticleSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+
+@csrf_exempt
+def basic_list(request):
+    """
+    List all code basicLists, or create a new Article.
+    """
+    if request.method == 'GET':
+        basicLists = basicList.objects.all()
+        serializer = basicListSerializer(basicLists, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = basicListSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)

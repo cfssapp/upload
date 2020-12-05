@@ -10,6 +10,7 @@ urlpatterns = [
 	path('task-delete/<str:pk>/', views.taskDelete, name="task-delete"),
 
 	path('article/', views.article_list),
+	path('basic-list/', views.basic_list),
 ]
 
 
