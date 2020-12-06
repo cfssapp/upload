@@ -21,10 +21,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
+    url(r'api/', include('api.urls')),
 
     url(r'admin/', admin.site.urls),
-    url(r'^showimage/', include('showimage.urls')),
+    # url(r'^showimage/', include('showimage.urls')),
 ]
 
 
