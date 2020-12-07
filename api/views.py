@@ -15,16 +15,9 @@ from .models import Task, Article, basicList
 @api_view(['GET'])
 def apiOverview(request):
 	api_urls = [{
-        "logo": "https://64.media.tumblr.com/avatar_84bf27cec37f_128.pnj",
-        "title": "Albert Einstein",
-        "href": "https://www.google.com.my/",
-        "subDescription": "Imagination is more important than knowledge",
-        
-        "owner": "User",
-        "createdAt": 1607155074056,
-        "updatedAt": 1607155074056,
-        "percent": 83,
-        "status": "active", 
+        "id": 8,
+        "title": "完成Antd-Pro-Generator手动添加接口并生成代码",
+        "status": 0
     }]
 	return JsonResponse(api_urls, safe=False)
 
