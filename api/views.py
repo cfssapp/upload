@@ -27,16 +27,11 @@ def apiOverview(request):
     #     "status": "active", 
     # }]
     api_urls = [{
-        "code": 0,
-        "message": "操作成功",
-        "body": [
-            {
-                "id": 8,
-                "title": "完成Antd-Pro-Generator手动添加接口并生成代码",
-                "status": 0
-            },
-        ]
+        "id": 8,
+        "title": "完成Antd-Pro-Generator手动添加接口并生成代码",
+        "status": 0
     }]
+    
 	return JsonResponse(api_urls, safe=False)
 
 @api_view(['GET'])
