@@ -14,18 +14,64 @@ from .models import Task, Article, basicList
 @csrf_exempt
 @api_view(['GET'])
 def apiOverview(request):
-	api_urls = [{
-        "logo": "https://64.media.tumblr.com/avatar_84bf27cec37f_128.pnj",
-        "title": "Albert Einstein",
-        "href": "https://www.google.com.my/",
-        "subDescription": "Imagination is more important than knowledge",
+	# api_urls = [{
+    #     "logo": "https://64.media.tumblr.com/avatar_84bf27cec37f_128.pnj",
+    #     "title": "Albert Einstein",
+    #     "href": "https://www.google.com.my/",
+    #     "subDescription": "Imagination is more important than knowledge",
         
-        "owner": "User",
-        "createdAt": 1607155074056,
-        "updatedAt": 1607155074056,
-        "percent": 83,
-        "status": "active", 
-    }]
+    #     "owner": "User",
+    #     "createdAt": 1607155074056,
+    #     "updatedAt": 1607155074056,
+    #     "percent": 83,
+    #     "status": "active", 
+    # }]
+    api_urls = [{
+    "code": 0,
+    "message": "操作成功",
+    "body": [
+        {
+            "id": 8,
+            "title": "完成Antd-Pro-Generator手动添加接口并生成代码",
+            "status": 0
+        },
+        {
+            "id": 7,
+            "title": "修改Antd-Pro-Generator UI",
+            "status": 0
+        },
+        {
+            "id": 6,
+            "title": "完善Antd-Pro-Generator数据类型定义",
+            "status": 0
+        },
+        {
+            "id": 5,
+            "title": "文章使用Antd-Pro-Generator生成代码",
+            "status": 1
+        },
+        {
+            "id": 4,
+            "title": "Antd-Pro-Generator支持TypeScript",
+            "status": 2
+        },
+        {
+            "id": 3,
+            "title": "发布Antd-Pro-Generator vscode 插件",
+            "status": 1
+        },
+        {
+            "id": 2,
+            "title": "文章Ant Design Pro 快速入门",
+            "status": 1
+        },
+        {
+            "id": 1,
+            "title": "文章React快速入门",
+            "status": 1
+        }
+    ]
+}]
 	return JsonResponse(api_urls, safe=False)
 
 @api_view(['GET'])
