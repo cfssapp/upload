@@ -14,11 +14,13 @@ from .models import Task, Article, basicList
 @csrf_exempt
 @api_view(['GET'])
 def apiOverview(request):
-	api_urls = [{
-        "status": "ok",
-        "currentAuthority": "admin",    
-    }]
-	return JsonResponse(api_urls, safe=False)
+    if request.method == 'POST':
+        api_urls = [{
+            "status": "ok",
+            "currentAuthority": "admin",    
+        }]
+        return JsonResponse(api_urls, safe=False)
+    return JsonResponse(serializer.errors, status=400)
 
 @api_view(['GET'])
 def taskList(request):
