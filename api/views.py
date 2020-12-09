@@ -12,7 +12,6 @@ from .models import Task, Article, basicList
 
 
 @csrf_exempt
-@api_view(['GET'])
 def apiOverview(request):
     if request.method == 'POST':
         api_urls = [{
