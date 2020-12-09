@@ -81,8 +81,7 @@ def article_list(request):
 
 
     elif request.method == 'POST':
-        # data = JSONParser().parse(request)
-        data = request.data
+        data = JSONParser().parse(request)
         serializer = ArticleSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
@@ -129,8 +128,7 @@ def basic_list(request):
 
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = basicListSerializer(data=data)
+        serializer = basicListSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
