@@ -14,10 +14,10 @@ from .models import Task, Article, basicList
 @csrf_exempt
 def apiOverview(request):
     if request.method == 'POST':
-        api_urls = [{
+        api_urls = {
             "status": "ok",
             "currentAuthority": "admin",    
-        }]
+        }
         return JsonResponse(api_urls, safe=False)
     return JsonResponse(serializer.errors, status=400)
 
