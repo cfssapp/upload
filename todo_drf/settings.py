@@ -133,4 +133,5 @@ MEDIA_URL = 'https://drfserver.pythonanywhere.com/media/'
 
 CORS_ORIGIN_WHITELIST = [
     "https://www.moba.my",
+    "https://www.moba.my/",
 ]
