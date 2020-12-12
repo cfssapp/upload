@@ -4,4 +4,3 @@ from .models import Task, Article, basicList
 # Register your models here.
 admin.site.register(Task)
 admin.site.register(Article)
-admin.site.register(basicList)
