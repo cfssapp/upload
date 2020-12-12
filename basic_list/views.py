@@ -25,17 +25,17 @@ def basic_list(request):
     List all code articles, or create a new Article.
     """
     if request.method == 'GET':
-        articles = Article.objects.all()
-        serializer = ArticleSerializer(articles, many=True)
+        articles = basicList.objects.all()
+        serializer = basicListSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = ArticleSerializer(data=data)
+        serializer = basicListSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            articles = Article.objects.all()
-            serializer = ArticleSerializer(articles, many=True)
+            articles = basicList.objects.all()
+            serializer = basicListSerializer(articles, many=True)
             return JsonResponse(serializer.data, safe=False)
         return JsonResponse(serializer.errors, status=400)
 
