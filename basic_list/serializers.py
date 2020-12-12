@@ -4,7 +4,7 @@ from .models import basicList
 
 class basicListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Article
+        model = basicList
         # fields = ['id', 'title', 'author']
         fields ='__all__'
 
