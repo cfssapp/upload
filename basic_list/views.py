@@ -9,7 +9,7 @@ from .models import basicList
 
 # Create your views here.
 
-# @csrf_exempt
+
 def apiOverview(request):
     if request.method == 'POST':
         api_urls = {
@@ -19,7 +19,7 @@ def apiOverview(request):
         return JsonResponse(api_urls, safe=False)
     return JsonResponse(serializer.errors, status=400)
 
-# @csrf_exempt
+
 def basic_list(request):
     """
     List all code articles, or create a new Article.
