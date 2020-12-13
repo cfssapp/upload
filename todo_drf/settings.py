@@ -132,7 +132,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'https://drfserver.pythonanywhere.com/media/'
 
-# CORS_ORIGIN_ALLOW_ALL=True
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
 
 CORS_ORIGIN_WHITELIST = [
     "https://www.moba.my",
