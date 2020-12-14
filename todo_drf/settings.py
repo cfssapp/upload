@@ -144,3 +144,6 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = [
     "https://www.moba.my",
 ]
+
+# Custom user model
+AUTH_USER_MODEL = "users.NewUser"
