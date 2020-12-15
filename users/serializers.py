@@ -9,7 +9,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
     user_name = serializers.CharField(required=True)
     password = serializers.CharField(min_length=8, write_only=True)
-    is_active = models.BooleanField(required=false)
+    is_active = serializers.BooleanField(required=false)
 
     class Meta:
         model = NewUser
