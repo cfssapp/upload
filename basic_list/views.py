@@ -7,7 +7,8 @@ from rest_framework.response import Response
 from .serializers import basicListSerializer
 from .models import basicList
 
-# Create your views here.
+from rest_framework import generics
+from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, IsAuthenticatedOrReadOnly, BasePermission, IsAdminUser, DjangoModelPermissions
 
 
 def apiOverview(request):
@@ -20,23 +21,37 @@ def apiOverview(request):
     return JsonResponse(serializer.errors, status=400)
 
 
-def basic_list(request):
-    """
-    List all code articles, or create a new Article.
-    """
-    if request.method == 'GET':
-        articles = basicList.objects.all()
-        serializer = basicListSerializer(articles, many=True)
-        return JsonResponse(serializer.data, safe=False)
+# def basic_list(request):
+     
+#     if request.method == 'GET':
+#         articles = basicList.objects.all()
+#         serializer = basicListSerializer(articles, many=True)
+#         return JsonResponse(serializer.data, safe=False)
 
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = basicListSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            articles = basicList.objects.all()
-            serializer = basicListSerializer(articles, many=True)
-            return JsonResponse(serializer.data, safe=False)
-        return JsonResponse(serializer.errors, status=400)
+#     elif request.method == 'POST':
+#         data = JSONParser().parse(request)
+#         serializer = basicListSerializer(data=data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             articles = basicList.objects.all()
+#             serializer = basicListSerializer(articles, many=True)
+#             return JsonResponse(serializer.data, safe=False)
+#         return JsonResponse(serializer.errors, status=400)
+
+class PostUserWritePermission(BasePermission):
+    message = 'Editing posts is restricted to the author only.'
+
+    def has_object_permission(self, request, view, obj):
+
+        if request.method in SAFE_METHODS:
+            return True
+
+        return obj.author == request.user
+
+
+class basic_list(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Post.postobjects.all()
+    serializer_class = PostSerializer
 
 
