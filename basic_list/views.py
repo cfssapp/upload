@@ -51,7 +51,11 @@ class PostUserWritePermission(BasePermission):
 
 class basic_list(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
-    queryset = basicList.objects.all()
+    queryset = basicList.postobjects.all()
     serializer_class = basicListSerializer
 
 
+class basic_listDetail(generics.RetrieveUpdateDestroyAPIView, PostUserWritePermission):
+    permission_classes = [PostUserWritePermission]
+    queryset = basicList.objects.all()
+    serializer_class = basicListSerializer
