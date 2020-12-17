@@ -14,8 +14,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
-@csrf_exempt
-@api_view(['GET'])
+
 def apiOverview(request):
 	api_urls = {
     "name": "Serati Ma",
