@@ -14,14 +14,14 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
-# def apiOverview(request):
-#     if request.method == 'POST':
-#         api_urls = {
-#             "status": "ok",
-#             "currentAuthority": "admin",    
-#         }
-#         return JsonResponse(api_urls, safe=False)
-#     return JsonResponse(serializer.errors, status=400)
+def apiOverview(request):
+    api_urls = [{
+        "id": 8,
+        "title": "完成Antd-Pro-Generator手动添加接口并生成代码",
+        "status": 0
+    }]
+    
+	return JsonResponse(api_urls, safe=False)
 
 
 # def basic_list(request):
