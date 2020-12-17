@@ -59,6 +59,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Add extra responses here
         data['user_name'] = self.user.user_name
+        data['is_active'] = self.user.is_active
         return data
 
 
