@@ -41,23 +41,23 @@ def notices_list(request):
 	return JsonResponse(api_urls, safe=False)
 
 
-@csrf_exempt
-def test_list(request):
+# @csrf_exempt
+# def test_list(request):
      
-    if request.method == 'GET':
-        articles = basicList.objects.all()
-        serializer = basicListSerializer(articles, many=True)
-        return JsonResponse(serializer.data, safe=False)
+#     if request.method == 'GET':
+#         articles = basicList.objects.all()
+#         serializer = basicListSerializer(articles, many=True)
+#         return JsonResponse(serializer.data, safe=False)
 
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = basicListSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            articles = basicList.objects.all()
-            serializer = basicListSerializer(articles, many=True)
-            return JsonResponse(serializer.data, safe=False)
-        return JsonResponse(serializer.errors, status=400)
+#     elif request.method == 'POST':
+#         data = JSONParser().parse(request)
+#         serializer = basicListSerializer(data=data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             articles = basicList.objects.all()
+#             serializer = basicListSerializer(articles, many=True)
+#             return JsonResponse(serializer.data, safe=False)
+#         return JsonResponse(serializer.errors, status=400)
 
 
 
@@ -66,7 +66,6 @@ class basic_list(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = basicList.objects.all()
     serializer_class = basicListSerializer
-    ordering = ['-id']
 
     def create(self, request, *args, **kwargs):
         data = JSONParser().parse(request)
