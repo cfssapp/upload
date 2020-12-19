@@ -67,6 +67,19 @@ class basic_list(generics.ListCreateAPIView):
     queryset = basicList.objects.all()
     serializer_class = basicListSerializer
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.basicListSerializer(data=data)
+
+        if not serializer.is_valid():
+            return Response(
+                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+        articles = basicList.objects.all()
+        serializer = basicListSerializer(articles, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
 
 
 
