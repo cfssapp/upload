@@ -76,7 +76,7 @@ class basic_list(generics.ListCreateAPIView):
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         serializer.save()
-        articles = basicList.objects.all().order_by('id')
+        articles = basicList.objects.all().order_by('id').desc()
         serializer = basicListSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
