@@ -65,13 +65,9 @@ def test_list(request):
 class basic_list(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = basicList.objects.all()
-    serializer_class = basicListSerializer
+    serializer_class = basicListSerializer(queryset, many=True)
 
-    def filter_queryset(self, queryset):
-        
-        queryset = basicList.objects.all()
 
-        return queryset
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
