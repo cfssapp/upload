@@ -8,6 +8,8 @@ urlpatterns = [
 
 	path('basic-list/', views.basic_list.as_view(), name='listcreate'),
 	path('token/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+
+	path('test-list/', views.test_list.as_view(), name='testlistcreate'),
 ]
 
 
