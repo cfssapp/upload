@@ -66,6 +66,7 @@ class basic_list(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = basicList.objects.all()
     serializer_class = basicListSerializer
+    ordering = ['-id']
 
     def create(self, request, *args, **kwargs):
         data = JSONParser().parse(request)
@@ -77,7 +78,7 @@ class basic_list(generics.ListCreateAPIView):
 
         serializer.save()
         articles = basicList.objects.all()
-        serializer = basicListSerializer(articles.reverse(), many=True)
+        serializer = basicListSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
 
