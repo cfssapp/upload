@@ -67,6 +67,11 @@ class basic_list(generics.ListCreateAPIView):
     queryset = basicList.objects.all()
     serializer_class = basicListSerializer
 
+    def list(self,request):
+        articles = basicList.objects.all()
+        serializer = basicListSerializer(articles, many=True)
+        return Response(serializer.data)
+
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
