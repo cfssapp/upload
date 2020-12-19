@@ -40,6 +40,8 @@ def notices_list(request):
 ]
 	return JsonResponse(api_urls, safe=False)
 
+
+@csrf_exempt
 def test_list(request):
      
     if request.method == 'GET':
