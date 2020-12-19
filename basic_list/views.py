@@ -68,7 +68,8 @@ class basic_list(generics.ListCreateAPIView):
     serializer_class = basicListSerializer
 
     def create(self, request, *args, **kwargs):
-        serializer = self.basicListSerializer(data=data)
+        data = JSONParser().parse(request)
+        serializer = basicListSerializer(data=data)
 
         if not serializer.is_valid():
             return Response(
