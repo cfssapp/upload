@@ -65,7 +65,7 @@ def test_list(request):
 class basic_list(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = basicList.objects.all()
-    serializer_class = basicListSerializer(queryset, many=True)
+    serializer_class = basicListSerializer
 
 
 
