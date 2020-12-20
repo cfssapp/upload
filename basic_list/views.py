@@ -31,16 +31,16 @@ def currentUser2(request):
 	return JsonResponse(api_urls, safe=False) 
 
 
-class currentUser(generics.RetrieveAPIView):
+class currentUser(generics.ListAPIView):
+    queryset = NewUser.objects.all()
+    serializer_class = CustomUserSerializer
+
+class currentUserDetail(generics.RetrieveAPIView):
     # queryset = NewUser.objects.get(pk=object_id)
     queryset = NewUser.objects.all()
     serializer_class = CustomUserSerializer 
-    lookup_field = 'user_name' 
 
-# class currentUser(generics.ListAPIView):
-#     queryset = NewUser.objects.all()
-#     serializer_class = CustomUserSerializer    
-
+    
 def notices_list(request):
 	api_urls = [
   {
