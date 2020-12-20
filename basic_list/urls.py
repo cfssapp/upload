@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
 	path('', views.apiOverview, name="api-overview"),
-	# path('current-user/', views.currentUser, name="current_user"),
+	path('current-user2/', views.currentUser2, name="current_user2"),
 	path('notices-list/', views.notices_list, name="notices_list"),
 
 	path('basic-list/', views.basic_list.as_view(), name='listcreate'),
