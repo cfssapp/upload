@@ -21,14 +21,14 @@ def apiOverview(request):
 	api_urls = {}
 	return JsonResponse(api_urls, safe=False)
 
-def currentUser2(request):
-	api_urls = {
-    "name": "Serati Ma",
-    "avatar": "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
-    "userid": "00000001",
-    "email": "antdesign@alipay.com",
-}
-	return JsonResponse(api_urls, safe=False) 
+# def currentUser2(request):
+# 	api_urls = {
+#     "name": "Serati Ma",
+#     "avatar": "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
+#     "userid": "00000001",
+#     "email": "antdesign@alipay.com",
+# }
+# 	return JsonResponse(api_urls, safe=False) 
 
 
 class currentUser(generics.ListAPIView):
