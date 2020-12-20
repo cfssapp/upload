@@ -35,7 +35,7 @@ class currentUser(generics.RetrieveAPIView):
     # queryset = NewUser.objects.get(pk=object_id)
     queryset = NewUser.objects.all()
     serializer_class = CustomUserSerializer 
-    lookup_field = 'id' 
+    lookup_field = 'user_name' 
 
 # class currentUser(generics.ListAPIView):
 #     queryset = NewUser.objects.all()
