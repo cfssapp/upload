@@ -31,9 +31,8 @@ def apiOverview(request):
 # 	return JsonResponse(api_urls, safe=False) 
 
 
-class currentUser(generics.ListAPIView):
-    # queryset = NewUser.objects.all()
-    queryset = NewUser.objects.get(id=1)
+class currentUser(generics.RetrieveAPIView):
+    queryset = NewUser.objects.all()
     serializer_class = CustomUserSerializer    
 
 def notices_list(request):
