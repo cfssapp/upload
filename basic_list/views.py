@@ -21,19 +21,19 @@ def apiOverview(request):
 	api_urls = {}
 	return JsonResponse(api_urls, safe=False)
 
-def currentUser(request):
-	api_urls = {
-    "name": "Serati Ma",
-    "avatar": "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
-    "userid": "00000001",
-    "email": "antdesign@alipay.com",
-}
-	return JsonResponse(api_urls, safe=False) 
-
 # def currentUser(request):
-# 	class UserList(generics.ListAPIView):
-#     queryset = NewUser.objects.all()
-#     serializer_class = CustomUserSerializer    
+# 	api_urls = {
+#     "name": "Serati Ma",
+#     "avatar": "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
+#     "userid": "00000001",
+#     "email": "antdesign@alipay.com",
+# }
+# 	return JsonResponse(api_urls, safe=False) 
+
+def currentUser(request):
+	class UserList(generics.ListAPIView):
+    queryset = NewUser.objects.all()
+    serializer_class = CustomUserSerializer    
 
 def notices_list(request):
 	api_urls = [
