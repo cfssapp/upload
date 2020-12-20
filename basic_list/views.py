@@ -13,20 +13,27 @@ from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, IsAuthenti
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from users.models import NewUser
+from .serializers import CustomUserSerializer
 
 
 def apiOverview(request):
 	api_urls = {}
 	return JsonResponse(api_urls, safe=False)
 
+# def currentUser(request):
+# 	api_urls = {
+#     "name": "Serati Ma",
+#     "avatar": "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
+#     "userid": "00000001",
+#     "email": "antdesign@alipay.com",
+# }
+# 	return JsonResponse(api_urls, safe=False) 
+
 def currentUser(request):
-	api_urls = {
-    "name": "Serati Ma",
-    "avatar": "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
-    "userid": "00000001",
-    "email": "antdesign@alipay.com",
-}
-	return JsonResponse(api_urls, safe=False)    
+	class UserList(generics.ListAPIView):
+    queryset = NewUser.objects.all()
+    serializer_class = CustomUserSerializer    
 
 def notices_list(request):
 	api_urls = [
