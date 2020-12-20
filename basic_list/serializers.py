@@ -2,10 +2,11 @@ from rest_framework import serializers
 from .models import basicList
 
 class basicListSerializer(serializers.ModelSerializer):
-    # authors = serializers.StringRelatedField(many=True)
+    
+    owner_id = serializers.PrimaryKeyRelatedField()
 
     class Meta:
         model = basicList
-        # fields = ['id', 'title', 'author']
-        fields ='__all__'
+        fields = ['id', 'title', 'owner_id']
+        # fields ='__all__'
 
