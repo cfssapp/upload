@@ -31,7 +31,7 @@ def apiOverview(request):
 # 	return JsonResponse(api_urls, safe=False) 
 
 
-class currentUser(generics.RetrieveAPIView):
+class currentUser(generics.ListAPIView):
     queryset = NewUser.objects.all()
     serializer_class = CustomUserSerializer    
 
