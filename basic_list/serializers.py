@@ -3,10 +3,10 @@ from .models import basicList
 
 class basicListSerializer(serializers.ModelSerializer):
     
-    owner_id = serializers.PrimaryKeyRelatedField()
+    # owner_id = serializers.PrimaryKeyRelatedField()
 
     class Meta:
         model = basicList
-        fields = ['id', 'title', 'owner_id']
-        # fields ='__all__'
+        # fields = ['id', 'title', 'owner_id']
+        fields ='__all__'
 
