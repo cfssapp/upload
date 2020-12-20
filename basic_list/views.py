@@ -30,8 +30,8 @@ def apiOverview(request):
 # }
 # 	return JsonResponse(api_urls, safe=False) 
 
-def currentUser(request):
-	class UserList(generics.ListAPIView):
+
+class currentUser(generics.ListAPIView):
     queryset = NewUser.objects.all()
     serializer_class = CustomUserSerializer    
 
