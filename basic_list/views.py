@@ -14,7 +14,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from users.models import NewUser
-from .serializers import CustomUserSerializer
+from users.serializers import CustomUserSerializer
 
 
 def apiOverview(request):
