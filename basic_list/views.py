@@ -32,7 +32,7 @@ def currentUser2(request):
 
 
 class currentUser(generics.ListAPIView):
-    queryset = NewUser.objects.all(id=1)
+    queryset = NewUser.objects.all(pk=1)
     serializer_class = CustomUserSerializer    
 
 def notices_list(request):
