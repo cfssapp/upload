@@ -8,9 +8,6 @@ urlpatterns = [
 
 	path('todo-list/', views.todo_list.as_view(), name='todolistcreate'),
 	
-
-	# path('current-user2/', views.currentUser2, name="current_user2"),
-	# path('test-list/', views.test_list, name='testlistcreate'),
 ]
 
 

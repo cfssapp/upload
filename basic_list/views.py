@@ -19,19 +19,8 @@ def apiOverview(request):
 	api_urls = {}
 	return JsonResponse(api_urls, safe=False)
 
-# def currentUser2(request):
-# 	api_urls = {
-#     "name": "Serati Ma",
-#     "avatar": "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
-#     "userid": "00000001",
-#     "email": "antdesign@alipay.com",
-# }
-# 	return JsonResponse(api_urls, safe=False) 
 
-
-
-
-    
+   
 def notices_list(request):
 	api_urls = [
   {
@@ -43,26 +32,6 @@ def notices_list(request):
   },
 ]
 	return JsonResponse(api_urls, safe=False)
-
-
-# @csrf_exempt
-# def test_list(request):
-     
-#     if request.method == 'GET':
-#         articles = basicList.objects.all()
-#         serializer = basicListSerializer(articles, many=True)
-#         return JsonResponse(serializer.data, safe=False)
-
-#     elif request.method == 'POST':
-#         data = JSONParser().parse(request)
-#         serializer = basicListSerializer(data=data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             articles = basicList.objects.all()
-#             serializer = basicListSerializer(articles, many=True)
-#             return JsonResponse(serializer.data, safe=False)
-#         return JsonResponse(serializer.errors, status=400)
-
 
 
 
