@@ -5,7 +5,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import basicListSerializer
-from .models import basicList
+from .models import todoList
 
 from rest_framework import generics
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, IsAuthenticatedOrReadOnly, BasePermission, IsAdminUser, DjangoModelPermissions
