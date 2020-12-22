@@ -6,7 +6,7 @@ urlpatterns = [
 	# path('current-user2/', views.currentUser2, name="current_user2"),
 	path('notices-list/', views.notices_list, name="notices_list"),
 
-	path('basic-list/', views.basic_list.as_view(), name='listcreate'),
+	path('todo-list/', views.todo_list.as_view(), name='todolistcreate'),
 	
 
 	

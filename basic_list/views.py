@@ -66,7 +66,7 @@ def notices_list(request):
 
 
 
-class basic_list(generics.ListCreateAPIView):
+class todo_list(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = basicList.objects.all()
     serializer_class = basicListSerializer
