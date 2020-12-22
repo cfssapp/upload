@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import basicListSerializer
+from .serializers import todoListSerializer
 from .models import todoList
 
 from rest_framework import generics
@@ -68,20 +68,20 @@ def notices_list(request):
 
 class todo_list(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
-    queryset = basicList.objects.all()
-    serializer_class = basicListSerializer
+    queryset = todoList.objects.all()
+    serializer_class = todoListSerializer
 
     def create(self, request, *args, **kwargs):
         data = JSONParser().parse(request)
-        serializer = basicListSerializer(data=data)
+        serializer = todoListSerializer(data=data)
 
         if not serializer.is_valid():
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         serializer.save()
-        articles = basicList.objects.all()
-        serializer = basicListSerializer(articles, many=True)
+        articles = todoList.objects.all()
+        serializer = todoListSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
 

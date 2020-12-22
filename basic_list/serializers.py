@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import todoList
 
-class basicListSerializer(serializers.ModelSerializer):
+class todoListSerializer(serializers.ModelSerializer):
     
     # owner_id = serializers.PrimaryKeyRelatedField()
 
