@@ -16,7 +16,7 @@ urlpatterns = [
 ]
 
 
-app_name = 'blog_api'
+app_name = 'basic_list'
 
 router = DefaultRouter()
 router.register('', PostList, basename='post')
