@@ -13,7 +13,7 @@ urlpatterns = [
     path('login/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
 
     path('current-user/', views.currentUser.as_view(), name="current_user"),
-	path('current-user/?id=<int:pk>/', views.currentUserDetail.as_view(), name="current_user_detail"),
+	path('current-user/<int:pk>/', views.currentUserDetail.as_view(), name="current_user_detail"),
 ]
 
 
