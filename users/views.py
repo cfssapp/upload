@@ -63,6 +63,5 @@ class currentUser(generics.ListAPIView):
     serializer_class = CustomUserSerializer
 
 class currentUserDetail(generics.RetrieveAPIView):
-    # queryset = NewUser.objects.get(pk=object_id)
     queryset = NewUser.objects.all()
     serializer_class = CustomUserSerializer 
