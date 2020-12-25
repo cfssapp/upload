@@ -54,6 +54,15 @@ class todo_list(generics.ListCreateAPIView):
         return JsonResponse(serializer.data, safe=False)
 
 
+class PostList(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = todoList.postobjects.all()
+    serializer_class = todoListSerializer
 
+
+class PostDetail(generics.RetrieveUpdateDestroyAPIView, PostUserWritePermission):
+    permission_classes = [PostUserWritePermission]
+    queryset = todoList.objects.all()
+    serializer_class = todoListSerializer
 
 
