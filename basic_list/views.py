@@ -88,3 +88,8 @@ class PostList(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return todoList.objects.filter(owner=user)
+
+class PostDetail(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = todoList.objects.all()
+    serializer_class = todoListSerializer
