@@ -55,8 +55,6 @@ class todo_list(generics.ListCreateAPIView):
         return JsonResponse(serializer.data, safe=False)
 
 
-
-
 # class PostList(generics.ListAPIView):
 #     permission_classes = [IsAuthenticated]
 #     queryset = todoList.objects.all()
@@ -93,3 +91,24 @@ class PostDetail(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]
     queryset = todoList.objects.all()
     serializer_class = todoListSerializer
+
+
+class CreatePost(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = todoList.objects.all()
+    serializer_class = todoListSerializer
+
+class AdminPostDetail(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = todoList.objects.all()
+    serializer_class = todoListSerializer
+
+class EditPost(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = todoListSerializer
+    queryset = todoList.objects.all()
+
+class DeletePost(generics.RetrieveDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = todoListSerializer
+    queryset = todoList.objects.all()
