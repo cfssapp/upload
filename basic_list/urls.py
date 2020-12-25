@@ -19,5 +19,5 @@ urlpatterns = [
 app_name = 'basic_list'
 
 router = DefaultRouter()
-router.register('', views.PostList, basename='post')
+router.register('post/', views.PostList, basename='post')
 urlpatterns = router.urls
