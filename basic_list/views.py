@@ -94,21 +94,21 @@ class PostDetail(generics.RetrieveAPIView):
 
 
 class CreatePost(generics.CreateAPIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     queryset = todoList.objects.all()
     serializer_class = todoListSerializer
 
 class AdminPostDetail(generics.RetrieveAPIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     queryset = todoList.objects.all()
     serializer_class = todoListSerializer
 
 class EditPost(generics.UpdateAPIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     serializer_class = todoListSerializer
     queryset = todoList.objects.all()
 
 class DeletePost(generics.RetrieveDestroyAPIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     serializer_class = todoListSerializer
     queryset = todoList.objects.all()
