@@ -110,7 +110,7 @@ class CreatePost(generics.CreateAPIView):
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         serializer.save(owner=self.request.user)
-        articles = todoList.objects.all()
+        articles = todoList.objects.filter(owner=user)
         serializer = todoListSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
