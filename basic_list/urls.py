@@ -19,5 +19,5 @@ from rest_framework.routers import DefaultRouter
 app_name = 'basic_list'
 
 router = DefaultRouter()
-router.register('post/', views.PostList, basename='post')
+router.register('', views.PostList, basename='post')
 urlpatterns = router.urls
