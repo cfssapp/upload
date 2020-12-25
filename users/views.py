@@ -59,7 +59,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 
 class currentUser(generics.ListAPIView):
-    queryset = NewUser.objects.all()
+    # queryset = NewUser.objects.all()
     serializer_class = CustomUserSerializer
 
     def get_queryset(self):
