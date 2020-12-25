@@ -54,24 +54,14 @@ class todo_list(generics.ListCreateAPIView):
         return JsonResponse(serializer.data, safe=False)
 
 
-class PostUserWritePermission(BasePermission):
-    message = 'Editing posts is restricted to the author only.'
-
-    def has_object_permission(self, request, view, obj):
-
-        if request.method in SAFE_METHODS:
-            return True
-
-        return obj.owner == request.user
-
 class PostList(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = todoList.objects.all()
     serializer_class = todoListSerializer
 
 
-class PostDetail(generics.RetrieveUpdateDestroyAPIView, PostUserWritePermission):
-    permission_classes = [PostUserWritePermission]
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = todoList.objects.all()
     serializer_class = todoListSerializer
 
