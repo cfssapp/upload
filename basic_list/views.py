@@ -100,16 +100,6 @@ class CreatePost(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-
-    def create(self, request, *args, **kwargs):
-        data = JSONParser().parse(request)
-        serializer = todoListSerializer(data=data)
-
-        if not serializer.is_valid():
-            return Response(
-                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer.save()
         user = self.request.user
         articles = todoList.objects.filter(owner=user)
         serializer = todoListSerializer(articles, many=True)
