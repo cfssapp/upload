@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-from rest_framework.routers import DefaultRouter
+# from rest_framework.routers import DefaultRouter
 
 urlpatterns = [
 	path('', views.apiOverview, name="api-overview"),
@@ -16,8 +16,8 @@ urlpatterns = [
 ]
 
 
-app_name = 'basic_list'
+# app_name = 'basic_list'
 
-router = DefaultRouter()
-router.register('', views.PostList, basename='post')
-urlpatterns = router.urls
+# router = DefaultRouter()
+# router.register('', views.PostList, basename='post')
+# urlpatterns = router.urls
