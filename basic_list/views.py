@@ -101,6 +101,19 @@ class CreatePost(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+    def create(self, request, *args, **kwargs):
+        data = JSONParser().parse(request)
+        serializer = todoListSerializer(data=data)
+
+        if not serializer.is_valid():
+            return Response(
+                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+        articles = todoList.objects.all()
+        serializer = todoListSerializer(articles, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
 class AdminPostDetail(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated]
     queryset = todoList.objects.all()
