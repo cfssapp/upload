@@ -56,7 +56,7 @@ class todo_list(generics.ListCreateAPIView):
 
 class PostList(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
-    queryset = todoList.postobjects.all()
+    queryset = todoList.objects.all()
     serializer_class = todoListSerializer
 
 
