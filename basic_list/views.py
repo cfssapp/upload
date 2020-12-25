@@ -10,7 +10,7 @@ from .models import todoList
 from rest_framework import generics
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, IsAuthenticatedOrReadOnly, BasePermission, IsAdminUser, DjangoModelPermissions
 
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from django.shortcuts import get_object_or_404
 
 
@@ -80,7 +80,7 @@ class todo_list(generics.ListCreateAPIView):
 #         return todoList.objects.all()
 
 class PostList(generics.ListAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = todoListSerializer
 
     def get_queryset(self):
@@ -88,27 +88,27 @@ class PostList(generics.ListAPIView):
         return todoList.objects.filter(owner=user)
 
 class PostDetail(generics.RetrieveAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     queryset = todoList.objects.all()
     serializer_class = todoListSerializer
 
 
 class CreatePost(generics.CreateAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     queryset = todoList.objects.all()
     serializer_class = todoListSerializer
 
 class AdminPostDetail(generics.RetrieveAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     queryset = todoList.objects.all()
     serializer_class = todoListSerializer
 
 class EditPost(generics.UpdateAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = todoListSerializer
     queryset = todoList.objects.all()
 
 class DeletePost(generics.RetrieveDestroyAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = todoListSerializer
     queryset = todoList.objects.all()
