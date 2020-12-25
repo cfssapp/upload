@@ -62,6 +62,10 @@ class currentUser(generics.ListAPIView):
     queryset = NewUser.objects.all()
     serializer_class = CustomUserSerializer
 
+    def get_queryset(self):
+        user = self.request.user
+        return todoList.objects.filter(id=user)
+
 class currentUserDetail(generics.RetrieveAPIView):
     queryset = NewUser.objects.all()
     serializer_class = CustomUserSerializer 
