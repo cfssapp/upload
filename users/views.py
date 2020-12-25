@@ -64,7 +64,7 @@ class currentUser(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return NewUser.objects.filter(id=user)
+        return NewUser.objects.filter(user_name=user)
 
 class currentUserDetail(generics.RetrieveAPIView):
     queryset = NewUser.objects.all()
