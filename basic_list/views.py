@@ -74,7 +74,7 @@ class PostList(viewsets.ModelViewSet):
 
     def get_object(self, queryset=None, **kwargs):
         item = self.kwargs.get('pk')
-        return get_object_or_404(Post, slug=item)
+        return get_object_or_404(todoList, slug=item)
 
     # Define Custom Queryset
     def get_queryset(self):
