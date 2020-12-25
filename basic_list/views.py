@@ -68,22 +68,22 @@ class todo_list(generics.ListCreateAPIView):
 #     serializer_class = todoListSerializer
 
 
-# class PostList(viewsets.ModelViewSet):
-#     permission_classes = [IsAuthenticated]
-#     serializer_class = todoListSerializer
-
-#     def get_object(self, queryset=None, **kwargs):
-#         item = self.kwargs.get('pk')
-#         return get_object_or_404(todoList, id=item)
-
-#     # Define Custom Queryset
-#     def get_queryset(self):
-#         return todoList.objects.all()
-
-class PostList(generics.ListAPIView):
+class PostList(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = todoListSerializer
 
+    def get_object(self, queryset=None, **kwargs):
+        item = self.kwargs.get('pk')
+        return get_object_or_404(todoList, id=item)
+
+    # Define Custom Queryset
     def get_queryset(self):
-        user = self.request.user
-        return todoList.objects.filter(owner=user)
+        return todoList.objects.all()
+
+# class PostList(generics.ListAPIView):
+#     permission_classes = [IsAuthenticated]
+#     serializer_class = todoListSerializer
+
+#     def get_queryset(self):
+#         user = self.request.user
+#         return todoList.objects.filter(owner=user)
