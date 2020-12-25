@@ -62,7 +62,7 @@ class PostUserWritePermission(BasePermission):
         if request.method in SAFE_METHODS:
             return True
 
-        return obj.owner_id == request.user
+        return obj.owner == request.user
 
 class PostList(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
