@@ -56,15 +56,26 @@ class todo_list(generics.ListCreateAPIView):
 
 
 
-class PostList(generics.ListAPIView):
+# class PostList(generics.ListAPIView):
+#     permission_classes = [IsAuthenticated]
+#     queryset = todoList.objects.all()
+#     serializer_class = todoListSerializer
+
+
+# class PostDetail(generics.RetrieveAPIView):
+#     permission_classes = [IsAuthenticated]
+#     queryset = todoList.objects.all()
+#     serializer_class = todoListSerializer
+
+
+class PostList(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    queryset = todoList.objects.all()
-    serializer_class = todoListSerializer
+    serializer_class = PostSerializer
 
+    def get_object(self, queryset=None, **kwargs):
+        item = self.kwargs.get('pk')
+        return get_object_or_404(Post, slug=item)
 
-class PostDetail(generics.RetrieveAPIView):
-    permission_classes = [IsAuthenticated]
-    queryset = todoList.objects.all()
-    serializer_class = todoListSerializer
-
-
+    # Define Custom Queryset
+    def get_queryset(self):
+        return Post.objects.all()

@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+from rest_framework.routers import DefaultRouter
+
 urlpatterns = [
 	path('', views.apiOverview, name="api-overview"),
 	
@@ -14,3 +16,8 @@ urlpatterns = [
 ]
 
 
+app_name = 'blog_api'
+
+router = DefaultRouter()
+router.register('', PostList, basename='post')
+urlpatterns = router.urls
