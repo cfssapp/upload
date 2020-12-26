@@ -110,7 +110,7 @@ class CreatePost(generics.CreateAPIView):
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         serializer.save(owner=self.request.user)
-        articles = todoList.objects.filter(owner=self.request.user)
+        articles = todoList.objects.filter(owner=self.request.user).order_by('-id')
         serializer = todoListSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
@@ -131,7 +131,7 @@ class EditPost(generics.UpdateAPIView):
             # forcibly invalidate the prefetch cache on the instance.
             instance._prefetched_objects_cache = {}
 
-        articles = todoList.objects.filter(owner=self.request.user)
+        articles = todoList.objects.filter(owner=self.request.user).order_by('-id')
         serializer = todoListSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
@@ -143,6 +143,6 @@ class DeletePost(generics.RetrieveDestroyAPIView):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         self.perform_destroy(instance)
-        articles = todoList.objects.filter(owner=self.request.user)
+        articles = todoList.objects.filter(owner=self.request.user).order_by('-id')
         serializer = todoListSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
