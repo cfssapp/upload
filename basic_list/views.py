@@ -85,7 +85,7 @@ class PostList(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return todoList.objects.filter(owner=user)
+        return todoList.objects.filter(owner=user).reverse()
 
 class PostDetail(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated]
