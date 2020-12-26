@@ -114,11 +114,6 @@ class CreatePost(generics.CreateAPIView):
         serializer = todoListSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-class AdminPostDetail(generics.RetrieveAPIView):
-    permission_classes = [permissions.IsAuthenticated]
-    queryset = todoList.objects.all()
-    serializer_class = todoListSerializer
-
 class EditPost(generics.UpdateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = todoListSerializer
@@ -128,3 +123,10 @@ class DeletePost(generics.RetrieveDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = todoListSerializer
     queryset = todoList.objects.all()
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        articles = todoList.objects.filter(owner=self.request.user)
+        serializer = todoListSerializer(articles, many=True)
+        return JsonResponse(serializer.data, safe=False)
