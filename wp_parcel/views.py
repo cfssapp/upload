@@ -15,7 +15,7 @@ class ParcelList(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return parcelList.objects.filter(owner=user).order_by('-id')
+        return parcelList.objects.filter(parcel_owner=user).order_by('-id')
 
 class ParcelDetail(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated]
