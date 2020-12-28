@@ -36,8 +36,8 @@ class CreateParcel(generics.CreateAPIView):
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        serializer.save(owner=self.request.user)
-        articles = parcelList.objects.filter(owner=self.request.user).order_by('-id')
+        serializer.save(parcel_owner=self.request.user)
+        articles = parcelList.objects.filter(parcel_owner=self.request.user).order_by('-id')
         serializer = parcelListSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
@@ -56,7 +56,7 @@ class EditParcel(generics.UpdateAPIView):
         if getattr(instance, '_prefetched_objects_cache', None):
             instance._prefetched_objects_cache = {}
 
-        articles = parcelList.objects.filter(owner=self.request.user).order_by('-id')
+        articles = parcelList.objects.filter(parcel_owner=self.request.user).order_by('-id')
         serializer = parcelListSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
@@ -68,6 +68,6 @@ class DeleteParcel(generics.RetrieveDestroyAPIView):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         self.perform_destroy(instance)
-        articles = parcelList.objects.filter(owner=self.request.user).order_by('-id')
+        articles = parcelList.objects.filter(parcel_owner=self.request.user).order_by('-id')
         serializer = parcelListSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
