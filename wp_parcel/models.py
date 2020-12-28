@@ -12,4 +12,4 @@ class parcelList(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='parcel_list', default=1)
 
     def __str__(self):
-        return self.title
+        return self.tracking_no
