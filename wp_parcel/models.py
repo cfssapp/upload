@@ -8,8 +8,8 @@ class parcelList(models.Model):
     category = models.CharField(max_length=100)
     price = models.CharField(max_length=100)
     remark = models.CharField(max_length=100)
-    owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='todo_post', default=1)
+    parcel_owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='parcel_list', default=1)
 
     def __str__(self):
         return self.title
