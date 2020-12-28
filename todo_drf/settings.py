@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'api.apps.ApiConfig',
     'basic_list.apps.BasicListConfig',
+    'wp_parcel.apps.WpParcelConfig',
     
     'rest_framework',
     'corsheaders',
