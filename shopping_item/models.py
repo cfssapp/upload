@@ -9,7 +9,7 @@ class Item(models.Model):
     price = models.CharField(max_length=100)
     remark = models.CharField(max_length=100)
     item_owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='parcel_list', default=1)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='item', default=1)
 
     def __str__(self):
         return self.tracking_no
