@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'basic_list.apps.BasicListConfig',
     'wp_parcel.apps.WpParcelConfig',
-    'shopping_cart.apps.ShoppingCartConfig',
+    'shopping_item.apps.ShoppingItemConfig',
     
     'rest_framework',
     'corsheaders',
