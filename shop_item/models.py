@@ -19,7 +19,7 @@ class OrderItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.title
+        return self.item
 
 
 class Order(models.Model):
