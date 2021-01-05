@@ -19,8 +19,6 @@ class OrderItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     
 
-
-
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
@@ -30,4 +28,4 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
     
     def __str__(self):
-        return self.user.username
+        return self.user.user_name
