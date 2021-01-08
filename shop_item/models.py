@@ -10,6 +10,7 @@ class Item(models.Model):
     remark = models.CharField(max_length=100)
     item_owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='item', default=1)
+    ordered = models.BooleanField(default=False)
 
     def __str__(self):
         return self.tracking_no
