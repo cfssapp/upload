@@ -99,12 +99,11 @@ class AddToCartView(APIView):
         serializer = ItemSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+
 class CartList(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
-    serializer_class = OrderItemSerializer
+    serializer_class = ItemSerializer
 
     def get_queryset(self):
         user = self.request.user
-        return OrderItem.objects.filter(user=user).order_by('-id')
-
-
+        return Item.objects.filter(item_owner=user, ordered=True).order_by('-id')
