@@ -17,14 +17,14 @@ class Item(models.Model):
 
 class OrderItem(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='item', default=1)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='orderitem', default=1)
     ordered = models.BooleanField(default=False)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     
 
 class Order(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='item', default=1)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='order', default=1)
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
