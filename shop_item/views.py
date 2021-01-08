@@ -72,3 +72,35 @@ class DeleteItem(generics.RetrieveDestroyAPIView):
         articles = Item.objects.filter(item_owner=self.request.user).order_by('-id')
         serializer = ItemSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
+
+
+class AddToCartView(APIView):
+    def post(self, request, *args, **kwargs):
+        tracking_no = request.data.get('tracking_no', None)
+        if tracking_no is None:
+            return Response({"message": "Invalid request"}, status=HTTP_400_BAD_REQUEST)
+
+        item = get_object_or_404(Item, tracking_no=tracking_no)
+
+
+        order_item = OrderItem.objects.create(
+            item=item,
+            user=request.user,
+            ordered=False
+        )
+        order_item.item_variations.add(*variations)
+        order_item.save()
+
+        order_qs = Order.objects.filter(user=self.request.user, ordered=False)
+        if order_qs.exists():
+            order = order_qs[0]
+            if not order.items.filter(item__id=order_item.id).exists():
+                order.items.add(order_item)
+                return Response(status=HTTP_200_OK)
+
+        else:
+            ordered_date = timezone.now()
+            order = Order.objects.create(
+                user=request.user, ordered_date=ordered_date)
+            order.items.add(order_item)
+            return Response(status=HTTP_200_OK)
