@@ -95,6 +95,9 @@ class AddToCartView(APIView):
         
         order_item.save()
 
+        
+        item.update(ordered=True)
+
         articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
         serializer = ItemSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
