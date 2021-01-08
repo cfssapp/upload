@@ -20,7 +20,7 @@ class ItemList(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Item.objects.filter(item_owner=user).order_by('-id')
+        return Item.objects.filter(item_owner=user, ordered=False).order_by('-id')
 
 class ItemDetail(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated]
