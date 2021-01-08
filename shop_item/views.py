@@ -86,7 +86,6 @@ class AddToCartView(APIView):
 
         item = get_object_or_404(Item, tracking_no=tracking_no)
 
-
         order_item = OrderItem.objects.create(
             item=item,
             user=self.request.user,
@@ -96,7 +95,7 @@ class AddToCartView(APIView):
         order_item.save()
 
         
-        item.update(ordered=True)
+        
 
         articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
         serializer = ItemSerializer(articles, many=True)
