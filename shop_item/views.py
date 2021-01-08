@@ -42,7 +42,7 @@ class CreateItem(generics.CreateAPIView):
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         serializer.save(item_owner=self.request.user)
-        articles = Item.objects.filter(item_owner=self.request.user).order_by('-id')
+        articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
         serializer = ItemSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
@@ -61,7 +61,7 @@ class EditItem(generics.UpdateAPIView):
         if getattr(instance, '_prefetched_objects_cache', None):
             instance._prefetched_objects_cache = {}
 
-        articles = Item.objects.filter(item_owner=self.request.user).order_by('-id')
+        articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
         serializer = ItemSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
@@ -73,7 +73,7 @@ class DeleteItem(generics.RetrieveDestroyAPIView):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         self.perform_destroy(instance)
-        articles = Item.objects.filter(item_owner=self.request.user).order_by('-id')
+        articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
         serializer = ItemSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
@@ -95,6 +95,16 @@ class AddToCartView(APIView):
         
         order_item.save()
 
-        articles = Item.objects.filter(item_owner=self.request.user).order_by('-id')
+        articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
         serializer = ItemSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
+
+class CartList(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = ItemSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Item.objects.filter(item_owner=user).order_by('-id')
+
+
