@@ -6,7 +6,7 @@ from rest_framework import generics
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, IsAuthenticatedOrReadOnly, BasePermission, IsAdminUser, DjangoModelPermissions
 from rest_framework import viewsets, permissions
 
-from .serializers import ItemSerializer
+from .serializers import ItemSerializer, OrderItemSerializer, OrderSerializer
 from .models import Item, OrderItem, Order
 
 from rest_framework.views import APIView
@@ -101,10 +101,10 @@ class AddToCartView(APIView):
 
 class CartList(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
-    serializer_class = ItemSerializer
+    serializer_class = OrderItemSerializer
 
     def get_queryset(self):
         user = self.request.user
-        return Item.objects.filter(item_owner=user).order_by('-id')
+        return OrderItem.objects.filter(user=user).order_by('-id')
 
 
