@@ -94,7 +94,8 @@ class AddToCartView(APIView):
         
         order_item.save()
 
-        item.ordered = True
+        itemisordered = Item.objects.filter(item_owner=self.request.user, tracking_no=tracking_no)
+        itemisordered.update(ordered=True)
         
 
         articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
