@@ -89,22 +89,10 @@ class AddToCartView(APIView):
 
         order_item = OrderItem.objects.create(
             item=item,
-            user=request.user,
+            user=self.request.user,
             ordered=False
         )
-        order_item.item_variations.add(*variations)
+        
         order_item.save()
 
-        order_qs = Order.objects.filter(user=self.request.user, ordered=False)
-        if order_qs.exists():
-            order = order_qs[0]
-            if not order.items.filter(item__id=order_item.id).exists():
-                order.items.add(order_item)
-                return Response(status=HTTP_200_OK)
-
-        else:
-            ordered_date = timezone.now()
-            order = Order.objects.create(
-                user=request.user, ordered_date=ordered_date)
-            order.items.add(order_item)
-            return Response(status=HTTP_200_OK)
+        
