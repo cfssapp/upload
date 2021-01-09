@@ -111,7 +111,7 @@ class RemoveFromCartView(APIView):
         itemisordered = Item.objects.filter(item_owner=self.request.user, tracking_no=tracking_no)
         itemisordered.update(ordered=False)  
 
-        articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
+        articles = Item.objects.filter(item_owner=self.request.user, ordered=True).order_by('-id')
         serializer = ItemSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
