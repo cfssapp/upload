@@ -102,6 +102,18 @@ class AddToCartView(APIView):
         serializer = ItemSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+class RemoveFromCartView(APIView):
+    def post(self, request, *args, **kwargs):
+        tracking_no = request.data.get('tracking_no', None)
+        if tracking_no is None:
+            return Response({"message": "Invalid request"}, status=HTTP_400_BAD_REQUEST)
+
+        itemisordered = Item.objects.filter(item_owner=self.request.user, tracking_no=tracking_no)
+        itemisordered.update(ordered=True)  
+
+        articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
+        serializer = ItemSerializer(articles, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 class CartList(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
