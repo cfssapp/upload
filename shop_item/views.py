@@ -39,21 +39,21 @@ class CreateItem(generics.CreateAPIView):
         item_qs = Item.objects.filter(tracking_no=tracking_no)
         
         if item_qs.exists():
-            return Response({"message": "Invalid request"}, status=HTTP_400_BAD_REQUEST)
-
-
-        else:
-            data = JSONParser().parse(request)
-            serializer = ItemSerializer(data=data)
-
-            if not serializer.is_valid():
-                return Response(
-                    serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-            serializer.save(item_owner=self.request.user)
             articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
             serializer = ItemSerializer(articles, many=True)
             return JsonResponse(serializer.data, safe=False)
+
+        data = JSONParser().parse(request)
+        serializer = ItemSerializer(data=data)
+
+        if not serializer.is_valid():
+            return Response(
+                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save(item_owner=self.request.user)
+        articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
+        serializer = ItemSerializer(articles, many=True)
+        return JsonResponse(serializer.data, safe=False)
         
 
 class EditItem(generics.UpdateAPIView):
