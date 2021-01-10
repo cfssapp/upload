@@ -137,14 +137,13 @@ class OrderList(generics.ListAPIView):
 
 class AddToOrderView(APIView):
     def post(self, request, *args, **kwargs):
-        tracking_no = request.data.get('tracking_no', None)
-        if tracking_no is None:
-            return Response({"message": "Invalid request"}, status=HTTP_400_BAD_REQUEST)
+        shipping_address = request.data.get('shipping_address', None)
 
         order_items = Item.objects.filter(item_owner=self.request.user, ordered=True)
 
         order = Order.objects.create(
             user=self.request.user,
+            shipping_address=shipping_address
         )
 
         for item in order_items:
