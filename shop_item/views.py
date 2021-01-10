@@ -38,7 +38,7 @@ class CreateItem(generics.CreateAPIView):
         serializer = ItemSerializer(data=data)
 
         tracking_no = request.data.get('tracking_no', None)
-        item_qs = item.objects.filter(tracking_no=tracking_no, item_owner=self.request.user)
+        item_qs = Item.objects.filter(tracking_no=tracking_no, item_owner=self.request.user)
         
         if item_qs.exists():
             return Response({"message": "Tracking no already exists."}, status=HTTP_400_BAD_REQUEST)
