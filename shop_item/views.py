@@ -134,3 +134,26 @@ class OrderList(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return Order.objects.filter(user=user).order_by('-id')
+
+class AddToOrderView(APIView):
+    def post(self, request, *args, **kwargs):
+        tracking_no = request.data.get('tracking_no', None)
+        if tracking_no is None:
+            return Response({"message": "Invalid request"}, status=HTTP_400_BAD_REQUEST)
+
+        item = get_object_or_404(Item, tracking_no=tracking_no)
+
+        order_item = Order.objects.create(
+            item=item,
+            user=self.request.user,
+        )
+        
+        order_item.save()
+
+        itemisordered = Item.objects.filter(item_owner=self.request.user, tracking_no=tracking_no)
+        itemisordered.update(ordered=True)
+        
+
+        articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
+        serializer = ItemSerializer(articles, many=True)
+        return JsonResponse(serializer.data, safe=False)
