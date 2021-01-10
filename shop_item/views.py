@@ -126,3 +126,11 @@ class CartList(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return Item.objects.filter(item_owner=user, ordered=True).order_by('-id')
+
+class OrderList(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Order.objects.filter(user=user).order_by('-id')
