@@ -27,7 +27,7 @@ class Order(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='order', default=1)
     items = models.ManyToManyField(OrderItem)
-    shipping_address = models.CharField(max_length=100)
+    shipping_address = models.CharField(max_length=100, default="not set")
     
     def __str__(self):
         return self.user.user_name
