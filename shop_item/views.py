@@ -34,15 +34,14 @@ class CreateItem(generics.CreateAPIView):
     serializer_class = ItemSerializer
 
     def create(self, request, *args, **kwargs):
-        data = JSONParser().parse(request)
-        serializer = ItemSerializer(data=data)
-
         tracking_no = request.data.get('tracking_no', None)
-        item_qs = Item.objects.filter(tracking_no=tracking_no, item_owner=self.request.user)
+        item_qs = Item.objects.filter(tracking_no=tracking_no)
         
         if item_qs.exists():
             return Response({"message": "Tracking no already exists."}, status=HTTP_400_BAD_REQUEST)
-
+        
+        data = JSONParser().parse(request)
+        serializer = ItemSerializer(data=data)
 
         if not serializer.is_valid():
             return Response(
