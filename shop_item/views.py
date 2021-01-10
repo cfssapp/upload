@@ -42,7 +42,7 @@ class CreateItem(generics.CreateAPIView):
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        tracking_no = request.data.get('tracking_no', None)
+        
 		item_qs = Item.objects.filter(tracking_no=tracking_no)
         serializer.save(item_owner=self.request.user)
         articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
