@@ -34,8 +34,7 @@ class CreateItem(generics.CreateAPIView):
     serializer_class = ItemSerializer
 
     def create(self, request, *args, **kwargs):
-        data = JSONParser().parse(request)
-        serializer = ItemSerializer(data=data)
+
         tracking_no = request.data.get('tracking_no', None)
         item_qs = Item.objects.filter(tracking_no=tracking_no)
         
@@ -44,7 +43,8 @@ class CreateItem(generics.CreateAPIView):
             serializer = ItemSerializer(articles, many=True)
             return JsonResponse(serializer.data, safe=False)
 
-        
+        data = JSONParser().parse(request)
+        serializer = ItemSerializer(data=data)
 
         if not serializer.is_valid():
             return Response(
