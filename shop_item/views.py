@@ -141,14 +141,13 @@ class AddToOrderView(APIView):
         if tracking_no is None:
             return Response({"message": "Invalid request"}, status=HTTP_400_BAD_REQUEST)
 
-        item = get_object_or_404(Item, tracking_no=tracking_no)
+        order_items = Item.items.all(item_owner=user, ordered=True)
 
-        order_item = Order.objects.create(
-            items=item,
+        order = Order.objects.create(
             user=self.request.user,
         )
+        order.items.add(order_items)
         
-        order_item.save()
 
         itemisordered = Item.objects.filter(item_owner=self.request.user, tracking_no=tracking_no)
         itemisordered.update(ordered=True)
