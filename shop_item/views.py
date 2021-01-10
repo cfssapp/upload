@@ -144,7 +144,7 @@ class AddToOrderView(APIView):
         item = get_object_or_404(Item, tracking_no=tracking_no)
 
         order_item = Order.objects.create(
-            item=item,
+            items=item,
             user=self.request.user,
         )
         
