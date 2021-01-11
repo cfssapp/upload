@@ -135,8 +135,10 @@ class AddToOrderView(APIView):
 
         cartadded_items = Item.objects.filter(item_owner=self.request.user, cartadded=True)
         for item in cartadded_items:
+            item.update(cartadded=False)
+            item.update(ordered=True)
             order.items.add(item)
 
-        articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
+        articles = Item.objects.filter(item_owner=self.request.user, cartadded=True, ordered=False).order_by('-id')
         serializer = ItemSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
