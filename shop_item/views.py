@@ -128,14 +128,13 @@ class AddToOrderView(APIView):
     def post(self, request, *args, **kwargs):
         shipping_address = request.data.get('shipping_address', None)
 
-        order_items = Item.objects.filter(item_owner=self.request.user, ordered=True)
-
         order = Order.objects.create(
             user=self.request.user,
             shipping_address=shipping_address
         )
 
-        for item in order_items:
+        ordered_items = Item.objects.filter(item_owner=self.request.user, ordered=True)
+        for item in ordered_items:
             order.items.add(item)
 
         articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
