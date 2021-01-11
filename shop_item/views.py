@@ -138,6 +138,7 @@ class AddToOrderView(APIView):
             order.items.add(item)
     
         cartadded_items.update(ordered=True)
+        cartadded_items.update(cartadded=False)
         for item in cartadded_items:
             item.save()
 
