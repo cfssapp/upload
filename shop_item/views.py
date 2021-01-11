@@ -137,9 +137,8 @@ class AddToOrderView(APIView):
         for item in cartadded_items:
             order.items.add(item)
     
-        order_items = order.items.all(item_owner=self.request.user, cartadded=True)
-        order_items.update(ordered=True)
-        for item in order_items:
+        cartadded_items.update(ordered=True)
+        for item in cartadded_items:
             item.save()
 
         articles = Item.objects.filter(item_owner=self.request.user, cartadded=True, ordered=False).order_by('-id')
