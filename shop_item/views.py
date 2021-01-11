@@ -88,20 +88,9 @@ class AddToCartView(APIView):
         if tracking_no is None:
             return Response({"message": "Invalid request"}, status=HTTP_400_BAD_REQUEST)
 
-        item = get_object_or_404(Item, tracking_no=tracking_no)
-
-        order_item = OrderItem.objects.create(
-            item=item,
-            user=self.request.user,
-            ordered=False
-        )
-        
-        order_item.save()
-
         itemisordered = Item.objects.filter(item_owner=self.request.user, tracking_no=tracking_no)
         itemisordered.update(ordered=True)
         
-
         articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
         serializer = ItemSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
