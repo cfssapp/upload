@@ -89,9 +89,9 @@ class AddToCartView(APIView):
             return Response({"message": "Invalid request"}, status=HTTP_400_BAD_REQUEST)
 
         item = Item.objects.filter(item_owner=self.request.user, tracking_no=tracking_no)
-        item.update(ordered=True)
+        item.update(cartadded=True)
         
-        articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
+        articles = Item.objects.filter(item_owner=self.request.user, cartadded=False, ordered=False).order_by('-id')
         serializer = ItemSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
@@ -133,8 +133,8 @@ class AddToOrderView(APIView):
             shipping_address=shipping_address
         )
 
-        ordered_items = Item.objects.filter(item_owner=self.request.user, ordered=True)
-        for item in ordered_items:
+        cartadded_items = Item.objects.filter(item_owner=self.request.user, cartadded=True)
+        for item in cartadded_items:
             order.items.add(item)
 
         articles = Item.objects.filter(item_owner=self.request.user, ordered=False).order_by('-id')
