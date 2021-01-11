@@ -101,10 +101,10 @@ class RemoveFromCartView(APIView):
         if tracking_no is None:
             return Response({"message": "Invalid request"}, status=HTTP_400_BAD_REQUEST)
 
-        itemisordered = Item.objects.filter(item_owner=self.request.user, tracking_no=tracking_no)
-        itemisordered.update(ordered=False)  
+        item = Item.objects.filter(item_owner=self.request.user, tracking_no=tracking_no)
+        item.update(cartadded=False)  
 
-        articles = Item.objects.filter(item_owner=self.request.user, ordered=True).order_by('-id')
+        articles = Item.objects.filter(item_owner=self.request.user, cartadded=True, ordered=False).order_by('-id')
         serializer = ItemSerializer(articles, many=True)
         return JsonResponse(serializer.data, safe=False)
 
