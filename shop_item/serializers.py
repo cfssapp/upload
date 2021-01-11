@@ -16,7 +16,8 @@ class OrderItemSerializer(serializers.ModelSerializer):
         fields ='__all__'
 
 class OrderSerializer(serializers.ModelSerializer):
-    
+    items = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Order
         # fields = ['id', 'title', 'owner_id']
