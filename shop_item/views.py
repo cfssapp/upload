@@ -114,7 +114,7 @@ class CartList(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Item.objects.filter(item_owner=user, ordered=True).order_by('-id')
+        return Item.objects.filter(item_owner=user, cartadded=True, ordered=False).order_by('-id')
 
 class OrderList(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
