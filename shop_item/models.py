@@ -28,7 +28,7 @@ class OrderItem(models.Model):
     
 
 class Order(models.Model):
-    order_pk = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    order_pk = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='order', default=1)
     items = models.ManyToManyField(Item)
