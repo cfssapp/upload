@@ -12,6 +12,7 @@ class Item(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='item', default=1)
     ordered = models.BooleanField(default=False)
     cartadded = models.BooleanField(default=False)
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.tracking_no
