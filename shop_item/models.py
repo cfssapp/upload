@@ -36,5 +36,5 @@ class Order(models.Model):
     shipping_address = models.CharField(max_length=100, default="not set")
     
     def __str__(self):
-        return self.id
+        return self.user
 
