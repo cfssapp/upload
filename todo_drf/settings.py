@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'users',
+    'reset_migrations',
 
     # 'rest_framework_simplejwt.token_blacklist',
 
