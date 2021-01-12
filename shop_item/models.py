@@ -28,13 +28,13 @@ class OrderItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     
 
-class Order(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='order', default=1)
-    items = models.ManyToManyField(Item)
-    shipping_address = models.CharField(max_length=100, default="not set")
+# class Order(models.Model):
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+#     user = models.ForeignKey(
+#         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='order', default=1)
+#     items = models.ManyToManyField(Item)
+#     shipping_address = models.CharField(max_length=100, default="not set")
     
-    def __str__(self):
-        return self.user
+#     def __str__(self):
+#         return self.user
 
