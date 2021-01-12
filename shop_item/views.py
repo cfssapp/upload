@@ -6,7 +6,7 @@ from rest_framework import generics
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, IsAuthenticatedOrReadOnly, BasePermission, IsAdminUser, DjangoModelPermissions
 from rest_framework import viewsets, permissions
 
-from .serializers import ItemSerializer, OrderSerializer
+from .serializers import ItemSerializer, OrderItemSerializer, OrderSerializer
 from .models import Item, OrderItem, Order
 
 from rest_framework.views import APIView
