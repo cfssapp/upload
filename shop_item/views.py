@@ -7,7 +7,7 @@ from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, IsAuthenti
 from rest_framework import viewsets, permissions
 
 from .serializers import ItemSerializer, OrderSerializer
-from .models import Item, Order
+from .models import Item, OrderItem, Order
 
 from rest_framework.views import APIView
 from django.shortcuts import render, get_object_or_404
