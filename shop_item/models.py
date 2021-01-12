@@ -28,12 +28,12 @@ class OrderItem(models.Model):
     
 
 class Order(models.Model):
-    order_pk = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    order_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='order', default=1)
     items = models.ManyToManyField(Item)
     shipping_address = models.CharField(max_length=100, default="not set")
     
     def __str__(self):
-        return self.order_pk
+        return self.order_id
 
