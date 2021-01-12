@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-import uuid
+
 
 # Create your models here.
 class Item(models.Model):
@@ -28,7 +28,6 @@ class OrderItem(models.Model):
     
 
 class Order(models.Model):
-    order_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='order', default=1)
     items = models.ManyToManyField(Item)
